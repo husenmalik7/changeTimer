@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <h1>change timer</h1>
+  <textarea name="" id="input" cols="30" rows="10"></textarea>
+
+  <br>
+
+  <button onclick="printInput()">submit</button>
+
+  <br>
+  <br>
+
+  <!-- <h1 id="output"></h1> -->
+  <textarea name="" id="output" cols="30" rows="10"></textarea>
+
+  <script>
+    const input = document.getElementById('input');
+    const output = document.getElementById('output');
+
+
+    function printInput() {
+      let value = input.value
+
+      let separateLines = value.split(/\n/g);
+      let result = []
+
+      
+
+      for (let i=0;i<separateLines.length;i++) {
+        result.push(
+          change(separateLines[i]) + '\n'
+        )
+
+      }      
+
+      result = result.join()
+
+      result = result.replace(/,/g, "");
+
+
+      
+
+
+      output.innerHTML = `${result}`
+    }
+
+    function change(value) {
+
+      let minutes = parseInt(`${value[3]}${value[4]}`)
+
+      if (value[0] === '0' && value[1] === '0' && value[2] === ':') {
+        let seconds = parseInt(`${value[6]}${value[7]}`)
+
+        if (seconds >= 30) {
+          minutes = minutes + 1
+        }
+      } else {
+        let hours = parseInt(value[1])
+        minutes = (hours * 60) + minutes
+
+        let seconds = parseInt(`${value[6]}${value[7]}`)
+        if (seconds >= 30) {
+          minutes = minutes + 1
+        }
+      }
+
+      console.log(minutes)
+      return minutes
+    }
+
+
+  </script>
+</body>
+
+</html>
